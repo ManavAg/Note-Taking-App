@@ -50,7 +50,7 @@
 
   <!-- the row template -->
   <script type="text/template" id="rowTemplate">
-		<td><b><%= title %></b></td>
+		<td><a href="#note/<%= id %>/view"><b><%= title %></b></a></td>
 		<td><%= created %></td>
 		<td><%= edited %></td>
 		<td>
@@ -58,7 +58,7 @@
 			<a class="btn btn-info btn-small" href="#note/<%= id %>/edit">Edit</a>
 			<a href="#" class="delete btn btn-danger btn-small">Delete</a>
 		</td>
-  </script>
+	</script>
 
   <!-- the form, used for new note and edit note -->
   <script type="text/jst" id="formTemplate">
@@ -102,29 +102,8 @@
     // First note of the app is passed manually
     router.notes.reset([
       {
-        "title": "1My First Note",
+        "title": "My First Note",
         "id": "T1" + moment(),
-        "description": "I am going to write my daily tasks in this app everyday",
-				"created": currentTime,
-				"edited": currentTime,
-      },
-			{
-        "title": "3My First Note",
-        "id": "T2" + moment(),
-        "description": "I am going to write my daily tasks in this app everyday",
-				"created": currentTime,
-				"edited": currentTime,
-      },
-			{
-        "title": "4My First Note",
-        "id": "T3" + moment(),
-        "description": "I am going to write my daily tasks in this app everyday",
-				"created": currentTime,
-				"edited": currentTime,
-      },
-			{
-        "title": "2My First Note",
-        "id": "T4" + moment(),
         "description": "I am going to write my daily tasks in this app everyday",
 				"created": currentTime,
 				"edited": currentTime,
