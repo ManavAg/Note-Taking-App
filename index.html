@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Backbone based Note App</title>
+  <!-- load the stylesheets -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link  rel="stylesheet" type="text/css" href="css/main.css" />
+  <!-- load the required libraries -->
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+	<script type="text/javascript" src="js/moment.js"></script>
+  <!-- load our scripts -->
+  <script type="text/javascript" src="js/router.js"></script>
+  <script type="text/javascript" src="js/models/model.js"></script>
+  <script type="text/javascript" src="js/views/index.js"></script>
+  <script type="text/javascript" src="js/views/row.js"></script>
+  <script type="text/javascript" src="js/views/edit.js"></script>
+  <script type="text/javascript" src="js/views/open.js"></script>
+</head>
+<body>
+	<div id = "header">
+		<h1>My Personal Notepad</h1>
+	</div>
+  <div class="container">
+    <div class="col-md-12" id="content">
+      <!-- Primary content of each page is loaded here -->
+    </div>
+  </div>
+
+  <!-- the index container -->
+  <script type="text/template" id="indexTemplate">
+    <center>
+			<a class="btn btn-primary btn-lg" href="#note/new">Create New Note</a>
+		</center>
+		<div id = "index">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th width="20%" id = 'title'>Title</th>
+						<th id = 'created'>Created on</th>
+						<th id = 'edited'>Last edited</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+  </script>
+
+  <!-- the row template -->
+  <script type="text/template" id="rowTemplate">
+		<td><b><%= title %></b></td>
+		<td><%= created %></td>
+		<td><%= edited %></td>
+		<td>
+			<a class="btn btn-success btn-small" href="#note/<%= id %>/view">Show</a>
+			<a class="btn btn-info btn-small" href="#note/<%= id %>/edit">Edit</a>
+			<a href="#" class="delete btn btn-danger btn-small">Delete</a>
+		</td>
+  </script>
+
+  <!-- the form, used for new note and edit note -->
+  <script type="text/jst" id="formTemplate">
+    <div class="well">
+      <div class="alert alert-danger fade in" style="display:none;"></div>
+      <form>
+        <h2><%= title %></h2>
+        <div class="form-group">
+          <label>Title:</label>
+          <input type="text" class="form-control" name="title" value="<%= title %>" />
+        </div>
+        <div class="form-group">
+          <label>Description:</label>
+          <textarea class="form-control" rows="5" name="description"><%= description %></textarea>
+        </div>
+        <button class="save btn btn-large btn-info" type="submit">Save</button>
+        <a href="#notes/index" class="btn btn-danger btn-large">Cancel</a>
+      </form>
+    </div>
+  </script>
+
+  <!-- the show template -->
+  <script type="text/template" id="showTemplate">
+    <div class="well">
+			<h2>
+				<%= title %>
+			</h2>
+			<p style="white-space:pre-wrap;"><%= description %></p>
+			<hr/>
+			<a class="btn btn-info" href="#note/<%= id %>/edit">Edit Note</a>
+			<a class="btn btn-danger" href="#notes/index">Back to All Notes</a>
+		</div>
+  </script>
+
+  <!-- Starting the app (Backbone of Backbone) -->
+  <script type="text/javascript">
+    var router = new app.router({
+      notes: new app.collection()
+    });
+		var currentTime = moment().format('h:mm:ss a, <br> DD/MM/YYYY');
+    // First note of the app is passed manually
+    router.notes.reset([
+      {
+        "title": "1My First Note",
+        "id": "T1" + moment(),
+        "description": "I am going to write my daily tasks in this app everyday",
+				"created": currentTime,
+				"edited": currentTime,
+      },
+			{
+        "title": "3My First Note",
+        "id": "T2" + moment(),
+        "description": "I am going to write my daily tasks in this app everyday",
+				"created": currentTime,
+				"edited": currentTime,
+      },
+			{
+        "title": "4My First Note",
+        "id": "T3" + moment(),
+        "description": "I am going to write my daily tasks in this app everyday",
+				"created": currentTime,
+				"edited": currentTime,
+      },
+			{
+        "title": "2My First Note",
+        "id": "T4" + moment(),
+        "description": "I am going to write my daily tasks in this app everyday",
+				"created": currentTime,
+				"edited": currentTime,
+      }
+    ]);
+    
+    // Starting the Backbone
+    Backbone.history.start();
+  </script>
+</body>
+</html>
